@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
+import {Place} from './place.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlacesService {
 
-  private places = [
+  private places: Place[] = [
     {
       id:"1",
       title: "Eiffel Tower",
-      imageUrl: "https://lh3.googleusercontent.com/4M4aeaq4LQwNoL7BkfnGD_BDQCUuVA2JWYXqEtuRbTnMK1kVgJcbE1KcPjHo-fDPHg",
+      imageURL: "https://lh3.googleusercontent.com/4M4aeaq4LQwNoL7BkfnGD_BDQCUuVA2JWYXqEtuRbTnMK1kVgJcbE1KcPjHo-fDPHg",
       comments:["Awesome place", "Wonderful experience"]
     },
     {
       id:"2",
       title: "Monumento a la Bandera",
-      imageUrl: "https://static.hosteltur.com/app/public/uploads/img/articles/2014/07/01/L_5c1a3ba3a4834_rosario_monumento.jpg",
+      imageURL: "https://static.hosteltur.com/app/public/uploads/img/articles/2014/07/01/L_5c1a3ba3a4834_rosario_monumento.jpg",
       comments:["Awesome place", "Wonderful experience"]
     }
   ]
@@ -27,11 +28,20 @@ export class PlacesService {
     return [...this.places]
   }
 
-  addPlace(title: string, imageUrl:string, comments){
-
+  addPlace(title: string, imageURL:string){
+    this.places.push({
+      title,
+      imageURL,
+      comments:[],
+      id: this.places.length + 1 + ""
+    });
   }
 
-  deletePlace(){}
+  deletePlace(placeID:string){
+    this.places = this.places.filter(place => {
+      return place.id !== placeID
+    })
+  }
 
   getPlace(placeId: string){
     return{

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { PlacesService } from './places.service';
 @Component({
   selector: 'app-places',
   templateUrl: './places.page.html',
@@ -8,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class PlacesPage implements OnInit {
 
   
-  constructor() { }
+  places:any = []
+  constructor(private placeService: PlacesService) { }
 
   ngOnInit() {
+    this.places = this.placeService.getPlaces();
   }
 
 }
