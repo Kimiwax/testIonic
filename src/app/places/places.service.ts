@@ -43,7 +43,7 @@ export class PlacesService {
     })
   }
 
-  getPlace(placeId: string){
+  getPlace(placeId: string | null){
     return{
       ...this.places.find(place => {
         return place.id === placeId
